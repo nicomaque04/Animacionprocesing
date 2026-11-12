@@ -1,0 +1,348 @@
+import processing.pdf.*;
+
+                        //CUBOS DE PSICODELIA
+//Codigo creado por Pol Rodrigez, Nicolas Maqueda y Victor Prat
+
+//definicion de valores variables
+float angleX1 = 0;
+float angleY1 = 0;
+float speedX1 = 0.02;
+float speedY1 = 0.03;
+float rate = 0.0001;  
+float maxSpeed = 0.1;  // Velocidad máxima
+float minSpeed = 0.01; // Velocidad mínima
+
+float initialAngleXCenter = radians (45);
+float initialAngleYCenter = radians (-30);
+
+float initialAngleXExt = radians (135);
+float initialAngleYExt = radians (60);
+
+float damping = 0.95;
+
+//Limite de pixeles en pantalla
+void setup() {
+  size(600, 600, P3D);
+}
+//funcion que dibuja los cubos
+void draw() {
+  //Color fondo
+  background(0);
+  //funcion que hace que no haya vordes en los cubos
+  noStroke();
+  
+  //Cubo enorme
+  pushMatrix (); 
+  translate (width / 2 , height / 2, 0);      //Posicion del cubo mayor
+  rotateX(angleX1 + initialAngleXCenter);     //Rotacion del cubo mayor
+  rotateY(angleY1 + initialAngleYCenter);
+  drawColoredBox();
+  popMatrix ();                               
+
+  //fila 1 columna 1
+  pushMatrix (); 
+  translate (width / 6 , height / 6, 0);      //posicion del cubo
+  rotateX(angleX1 + initialAngleXExt);        //Rotacion del cubo
+  rotateY(angleY1 + initialAngleYExt);
+  fill (171, 205, 239);                       //color del cubo
+  box (40);                                   // medida del Cubo
+  popMatrix ();                              //push y pop Matrix son utilizados para encarcelar una funcion y inependizarla en este caso en la creacion de un cubo
+  
+  //fila 1 columna 2
+  pushMatrix (); 
+  translate (width / 3 , height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (98, 118, 217);
+  box (40);
+  popMatrix ();
+  
+  //fila 1 columna 3
+  pushMatrix (); 
+  translate (width / 2 , height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (0, 88, 176);
+  box (40);
+  popMatrix ();
+  
+  //fila 1 columna 4
+  pushMatrix (); 
+  translate (2*width / 3 , height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (6, 38, 71);
+  box (40);
+  popMatrix ();
+  
+  //fila 1 columna 5
+  pushMatrix (); 
+  translate (5*width / 6 , height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (171, 213, 255);
+  box (40);
+  popMatrix ();
+  
+  //fila 2 columna 1
+  pushMatrix (); 
+  translate (width / 6 , height / 3, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (0, 88, 176);
+  box (40);
+  popMatrix ();
+  
+  //fila 2 columna 2
+  pushMatrix (); 
+  translate (width / 3 , height / 3, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (171, 205, 239);
+  box (40);
+  popMatrix ();
+  
+  //fila 2 columna 3
+  pushMatrix (); 
+  translate (width / 2 , height / 3, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (171, 213, 255);
+  box (40);
+  popMatrix ();
+  
+  //fila 2 columna 4
+  pushMatrix (); 
+  translate (2*width / 3 , height / 3, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (0, 12, 69);
+  box (40);
+  popMatrix ();
+  
+  //fila 2 columna 5
+  pushMatrix (); 
+  translate (5*width / 6 , height / 3, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (6, 38, 71);
+  box (40);
+  popMatrix ();
+
+//fila 3 columna 1
+  pushMatrix (); 
+  translate (width / 6 , height / 2, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (171, 213, 255);
+  box (40);
+  popMatrix ();
+  
+  //fila 3 columna 2
+  pushMatrix (); 
+  translate (width / 3 , height / 2, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (98, 118, 217);
+  box (40);
+  popMatrix ();
+  
+  //fila 3 columna 3
+  pushMatrix (); 
+  translate (width / 2 , height / 2, 0);
+  rotateX(angleX1 + initialAngleXCenter);
+  rotateY(angleY1 + initialAngleYCenter);
+  fill (171, 205, 239);
+  box (40);
+  popMatrix ();
+  
+  //fila 3 columna 4
+  pushMatrix (); 
+  translate (2*width / 3 , height / 2, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (6, 38, 71);
+  box (40);
+  popMatrix ();
+  
+  //fila 3 columna 5
+  pushMatrix (); 
+  translate (5*width / 6 , height / 2, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (0, 88, 176);
+  box (40);
+  popMatrix ();
+  
+  //fila 4 columna 1
+  pushMatrix (); 
+  translate (width / 6 , 2*height / 3, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (6, 38, 71);
+  box (40);
+  popMatrix ();
+  
+  //fila 4 columna 2
+  pushMatrix (); 
+  translate (width / 3 , 2*height / 3, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (171, 213, 255);
+  box (40);
+  popMatrix ();
+  
+  //fila 4 columna 3
+  pushMatrix (); 
+  translate (width / 2 , 2*height / 3, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (0, 88, 176);
+  box (40);
+  popMatrix ();
+  
+  //fila 4 columna 4
+  pushMatrix (); 
+  translate (2*width / 3 , 2*height / 3, 0);
+  rotateX(angleX1);
+  rotateY(angleY1);
+  fill (0, 12, 69);
+  box (40);
+  popMatrix ();
+  
+  //fila 4 columna 5
+  pushMatrix (); 
+  translate (5*width / 6 , 2*height / 3, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (171, 213, 255);
+  box (40);
+  popMatrix ();
+
+  //fila 5 columna 1
+  pushMatrix (); 
+  translate (width / 6 , 5*height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (98, 118, 217);
+  box (40);
+  popMatrix ();
+  
+  //fila 5 columna 2
+  pushMatrix (); 
+  translate (width / 3 , 5*height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (171, 205, 239);
+  box (40);
+  popMatrix ();
+  
+  //fila 5 columna 3
+  pushMatrix (); 
+  translate (width / 2 , 5*height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (171, 213, 255);
+  box (40);
+  popMatrix ();
+  
+  //fila 5 columna 4
+  pushMatrix (); 
+  translate (2*width / 3 , 5*height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (0, 88, 176);
+  box (40);
+  popMatrix ();
+  
+  //fila 5 columna 5
+  pushMatrix (); 
+  translate (5*width / 6 , 5*height / 6, 0);
+  rotateX(angleX1 + initialAngleXExt);
+  rotateY(angleY1 + initialAngleYExt);
+  fill (6, 38, 71);
+  box (40);
+  popMatrix ();
+
+  //Velocidad
+  angleX1 += speedX1;
+  angleY1 += speedY1;
+  
+  // Aplicar amortiguación para reducir la velocidad gradualmente
+  speedX1 *= damping;
+  speedY1 *= damping;
+  
+  // Limitar la velocidad máxima y mínima
+  speedX1 = constrain(speedX1, minSpeed, maxSpeed);
+  speedY1 = constrain(speedY1, minSpeed, maxSpeed);
+}
+
+//Movimiento del mouse
+void mouseDragged() {
+  float dx = mouseX - pmouseX;
+  float dy = mouseY - pmouseY;
+
+  // Modificar la velocidad basándonos en el movimiento del mouse
+  speedX1 += dy * 0.005;
+  speedY1 += dx * 0.005;
+}
+
+void drawColoredBox() {
+  float boxSize = 5000;
+
+  // Color cara frontal (celeste)
+  fill(171, 213, 255);
+  beginShape();                                            //Inicio de dibujo de la figura 
+  vertex(-boxSize / 2, -boxSize / 2, -boxSize / 2);        //Posicion de las caras
+  vertex(boxSize / 2, -boxSize / 2, -boxSize / 2);
+  vertex(boxSize / 2, boxSize / 2, -boxSize / 2);
+  vertex(-boxSize / 2, boxSize / 2, -boxSize / 2);
+  endShape(CLOSE);                                         //Final de dibujo de la figura
+
+  // Color cara posterior (hielo)
+  fill(171, 205, 239);
+  beginShape();
+  vertex(-boxSize / 2, -boxSize / 2, boxSize / 2);
+  vertex(boxSize / 2, -boxSize / 2, boxSize / 2);
+  vertex(boxSize / 2, boxSize / 2, boxSize / 2);
+  vertex(-boxSize / 2, boxSize / 2, boxSize / 2);
+  endShape(CLOSE);
+
+  // Color cara superior (azulado)
+  fill(0, 88, 176);
+  beginShape();
+  vertex(-boxSize / 2, -boxSize / 2, -boxSize / 2);
+  vertex(boxSize / 2, -boxSize / 2, -boxSize / 2);
+  vertex(boxSize / 2, -boxSize / 2, boxSize / 2);
+  vertex(-boxSize / 2, -boxSize / 2, boxSize / 2);
+  endShape(CLOSE);
+
+  // Color cara inferior (azul oscuro)
+  fill(6, 38, 71);
+  beginShape();
+  vertex(-boxSize / 2, boxSize / 2, -boxSize / 2);
+  vertex(boxSize / 2, boxSize / 2, -boxSize / 2);
+  vertex(boxSize / 2, boxSize / 2, boxSize / 2);
+  vertex(-boxSize / 2, boxSize / 2, boxSize / 2);
+  endShape(CLOSE);
+
+  // Color cara izquierda (alilado)
+  fill(98, 118, 217);
+  beginShape();
+  vertex(-boxSize / 2, -boxSize / 2, -boxSize / 2);
+  vertex(-boxSize / 2, boxSize / 2, -boxSize / 2);
+  vertex(-boxSize / 2, boxSize / 2, boxSize / 2);
+  vertex(-boxSize / 2, -boxSize / 2, boxSize / 2);
+  endShape(CLOSE);
+
+  // Color cara derecha (alilado oscuro)
+  fill(0, 12, 69);
+  beginShape();
+  vertex(boxSize / 2, -boxSize / 2, -boxSize / 2);
+  vertex(boxSize / 2, boxSize / 2, -boxSize / 2);
+  vertex(boxSize / 2, boxSize / 2, boxSize / 2);
+  vertex(boxSize / 2, -boxSize / 2, boxSize / 2);
+  endShape(CLOSE);
+}
+
+//el codigo consta de 5*5 cubos que rotan en el interior de un cubo mayor que tambien rota, la rotacion del cubo mayor proboca que algunos cubos desaparezcan y aparezcan probocando un efecto optico ya que se camuflan al tener el mismo color, tambien la velocidad de rotacion varia si mantienes presionado el mouse en cuanto sueltas el mause regresa a la posicion y velocidad inicial de rotacion.  
